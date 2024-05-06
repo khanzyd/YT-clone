@@ -1,0 +1,25 @@
+.sidebar{
+    @apply bg-yt-tertiary absolute md:block min-w-[15%] min-h-full text-slate-100;
+}
+
+.sidebar.open{
+    @apply translate-x-0;
+}
+
+.sidebar.close{
+    @apply translate-x-[-100%] hidden;
+
+}
+
+.Navbar > .link{
+    @apply py-3 tracking-wide font-semibold px-3 flex items-center justify-center md:justify-start hover:bg-yt-secondary rounded-xl;
+    
+}
+
+.Navbar > .link > .sidebarIcons{
+    @apply text-3xl md:mr-5;
+}
+
+.Navbar > .link > h3{
+    @apply hidden md:block;
+}

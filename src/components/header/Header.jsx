@@ -5,17 +5,17 @@ import { CiSearch } from "react-icons/ci";
 import { TbVideoPlus } from "react-icons/tb";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
-
 import YT_Logo from "../../assets/YT_logo_2.svg"
-// #0F0F0F navbar main
-// #222222 search button
 
-const Header = () => {
+const Header = ({toggleSidebar}) => {
   return (
-    <div className="h-[8vh] md:h-[10vh] xl:h-[7vh] bg-yt-main text-slate-50 px-[1rem] md:px-[2rem] flex items-center">
+    <div className="h-[8vh] md:h-[10vh] xl:h-[7vh] bg-yt-main text-slate-50 px-4 flex items-center">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center ">
-          <FaBars className="text-3xl mr-3" />
+          <FaBars 
+            className="text-3xl mr-3"
+            onClick={()=>toggleSidebar()}
+          />
           <div className="w-32">
             <img src={YT_Logo} className="" alt="" />
           </div>
