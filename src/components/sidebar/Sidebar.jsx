@@ -4,7 +4,7 @@ const Sidebar = () => {
   return (
     <>
       <div>
-        <h1 className="h-full w-[400px] text-xl bg-violet-500">sidebar</h1>
+        <h1 className="h-full w-[15vw] md:w-[15vw] text-xl bg-violet-500">sidebar</h1>
       </div>
     </>
   );
