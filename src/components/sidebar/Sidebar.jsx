@@ -16,10 +16,13 @@ import { AiOutlineLike } from "react-icons/ai";
 const Sidebar = ({sidebar,toggleSidebar}) => {
   return (
     <>
-      <div className={`sidebar ${sidebar? "open": "close"}`} >
+      <div
+        className={`sidebar ${
+          sidebar ? "open" : "close"
+        }`}
+      >
         <nav className="Navbar flex flex-col  items-strecth min-h-full px-2 py-1 min-w-full">
-
-          <Link to={""} className="link">
+          <Link to={"/"} className="link">
             <GoHomeFill className="sidebarIcons" />
             <h3>Home</h3>
           </Link>
@@ -48,7 +51,6 @@ const Sidebar = ({sidebar,toggleSidebar}) => {
             <MdWatchLater className="sidebarIcons" />
             <h3>Watch later</h3>
           </Link>
-
         </nav>
       </div>
     </>

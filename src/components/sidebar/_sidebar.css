@@ -1,9 +1,10 @@
 .sidebar{
-    @apply bg-yt-tertiary absolute md:block min-w-[15%] min-h-full text-slate-100;
+    @apply bg-yt-tertiary absolute md:relative min-w-[15%] min-h-full text-slate-100 ;
+    transition: all 2s ease-in-out;
 }
 
 .sidebar.open{
-    @apply translate-x-0;
+    @apply  translate-x-[0%] ;
 }
 
 .sidebar.close{
@@ -12,7 +13,7 @@
 }
 
 .Navbar > .link{
-    @apply py-3 tracking-wide font-semibold px-3 flex items-center justify-center md:justify-start hover:bg-yt-secondary rounded-xl;
+    @apply py-2 tracking-wide font-semibold px-3 flex items-center justify-center md:justify-start hover:bg-yt-secondary rounded-xl;
     
 }
 

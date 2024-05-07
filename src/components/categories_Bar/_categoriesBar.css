@@ -1,0 +1,8 @@
+.categoriesBar{
+    @apply flex gap-2 md:gap-4 max-w-full flex-nowrap text-nowrap;
+    overflow-x: scroll;
+}
+
+.categoriesBar::-webkit-scrollbar {
+  display: none;
+}
