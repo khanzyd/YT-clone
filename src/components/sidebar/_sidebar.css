@@ -1,5 +1,5 @@
 .sidebar{
-    @apply bg-yt-tertiary absolute md:relative min-w-[15%] min-h-full text-slate-100 ;
+    @apply bg-yt-tertiary absolute md:relative min-w-[15%] min-h-full text-slate-100 z-30 ;
     transition: all 2s ease-in-out;
 }
 
