@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-require("dotenv").config();
+
 
 import HomeScreen from "./screens/HomeScreen";
 import Header from "./components/header/Header";
