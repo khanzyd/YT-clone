@@ -10,10 +10,14 @@ import {
   MdLibraryAdd,
   MdOutlineWatchLater,
   MdWatchLater,
+  MdLogout,
 } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../features/authentication/authenticationSlice";
 
 const Sidebar = ({sidebar,toggleSidebar}) => {
+  let dispatch = useDispatch();
   return (
     <>
       <div
@@ -21,7 +25,7 @@ const Sidebar = ({sidebar,toggleSidebar}) => {
           sidebar ? "open" : "close"
         }`}
       >
-        <nav className="Navbar flex flex-col  items-strecth min-h-full px-2 py-1 min-w-full">
+        <nav className="Navbar flex flex-col items-strecthmin-h-full px-2 py-1 min-w-full">
           <Link to={"/"} className="link">
             <GoHomeFill className="sidebarIcons" />
             <h3>Home</h3>
@@ -50,6 +54,15 @@ const Sidebar = ({sidebar,toggleSidebar}) => {
           <Link to={""} className="link">
             <MdWatchLater className="sidebarIcons" />
             <h3>Watch later</h3>
+          </Link>
+
+          <Link 
+          to={""} 
+          className="link hover:bg-red-600"
+          onClick={()=>dispatch(logoutUser())}
+          >
+            <MdLogout className="sidebarIcons"/>
+            <h3>Log out</h3>
           </Link>
         </nav>
       </div>

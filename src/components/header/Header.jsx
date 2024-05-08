@@ -9,9 +9,9 @@ import YT_Logo from "../../assets/YT_logo_2.svg"
 
 const Header = ({toggleSidebar}) => {
   return (
-    <div className="h-[8vh] md:h-[10vh] xl:h-[7vh] bg-yt-main text-slate-50 px-4 flex items-center">
+    <div className="h-[8vh] md:h-[10vh] xl:h-[7vh] bg-yt-main border-b-2 border-b-yt-secondary text-slate-50 px-4 flex items-center">
       <div className="flex justify-between items-center w-full">
-        <div className="flex items-center ">
+        <div className="flex items-center select-none">
           <FaBars 
             className="text-3xl mr-3"
             onClick={()=>toggleSidebar()}
@@ -38,10 +38,10 @@ const Header = ({toggleSidebar}) => {
         </div>
 
         <div className="flex gap-5 items-center">
-          <FaSearch className="text-2xl md:hidden " />
-          <TbVideoPlus className="text-3xl" />
-          <IoMdNotificationsOutline className="text-3xl" />
-          <FaRegUserCircle className="text-3xl hidden md:block" />
+          <FaSearch className="text-2xl md:hidden cursor-pointer " />
+          <TbVideoPlus className="text-3xl cursor-pointer" />
+          <IoMdNotificationsOutline className="text-3xl cursor-pointer" />
+          <FaRegUserCircle className="text-3xl hidden md:block cursor-pointer" />
         </div>
       </div>
     </div>

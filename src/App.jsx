@@ -3,19 +3,28 @@ import {
   createRoutesFromElements,
   Outlet,
   Route,
-  RouterProvider
+  RouterProvider,
 } from "react-router-dom";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+require("dotenv").config();
 
 import HomeScreen from "./screens/HomeScreen";
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
-import { useState } from "react";
+import LoginScreen from "./components/login_Screen/LoginScreen";
 
 const Layout = () => {
+  const user = useSelector((store)=>store.user)
   const [sidebar, setSidebar] = useState(true);
-  const toggleSidebar = () => setSidebar((value)=>{
-    console.log(!value);
-    return !value});
+  const toggleSidebar = () => setSidebar((value) => !value);
+
+  if (!user.email) {
+    console.log(`user -> ${user.email}`);
+    return <LoginScreen />;
+  } 
+
+
   return (
     <>
       <div className="w-scrren h-screen bg-black">
@@ -29,11 +38,11 @@ const Layout = () => {
       </div>
     </>
   );
-}
+};
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Layout/>}>
+    <Route element={<Layout />}>
       <Route path="/" element={<HomeScreen />} />
     </Route>
   )
@@ -42,7 +51,7 @@ export const router = createBrowserRouter(
 function App() {
   return (
     <>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
   );
 }

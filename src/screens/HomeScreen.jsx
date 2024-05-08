@@ -17,6 +17,18 @@ const HomeScreen = () => {
           <Home_VideoCard />
           <Home_VideoCard />
           <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
+          <Home_VideoCard />
         </div>
     </div>
   );
