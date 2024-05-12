@@ -1,20 +1,21 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Navigate,
   Route,
   RouterProvider,
+  useNavigate,
 } from "react-router-dom";
 
-import HomeScreen from "./screens/HomeScreen";
-import Layout from "./Layout";
-import Authentication_Layout from "./components/authentication_Forms/Authentication_Layout";
+import HomeScreen from "./src/screens/HomeScreen";
+import Layout, { } from "./src/Layout";
+import { setLoading } from "./src/features/loading";
+import Authentication_Layout from "./src/components/authentication_Forms/Authentication_Layout";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-import { useDispatch } from "react-redux";
-import { setUser } from "./features/auth/authSlice";
-import { setLoading } from "./features/loading";
+import { auth } from "./src/firebase";
+import { loginUser } from "./src/features/authentication/authenticationSlice";
+
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,21 +28,26 @@ export const router = createBrowserRouter(
   )
 );
 
+
 function App() {
   let dispatch = useDispatch();
+  const loading = useSelector((store)=>store.loading)
+  console.log(loading);
+  let navigate = useNavigate
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       dispatch(
-        setUser({
+        loginUser({
           email: currentUser?.email,
-          name: currentUser?.displayName,
-          emailVerified: currentUser?.emailVerified,
         })
       );
-      dispatch(setLoading());
-      console.log("user changed in useEffect");
+      if (!currentUser) {
+        setLoading(false);
+        navigate("/auth");
+      } else {
+        setLoading(false);
+      }
     });
   }, []);
 

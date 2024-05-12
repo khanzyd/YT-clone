@@ -14,17 +14,15 @@ import {
 } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../features/authentication/authenticationSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
+import { setLoading } from "../../features/loading";
 
-const Sidebar = ({sidebar,toggleSidebar}) => {
+const Sidebar = ({ sidebar, toggleSidebar }) => {
   let dispatch = useDispatch();
   return (
     <>
-      <div
-        className={`sidebar ${
-          sidebar ? "open" : "close"
-        }`}
-      >
+      <div className={`sidebar ${sidebar ? "open" : "close"}`}>
         <nav className="Navbar flex flex-col items-strecthmin-h-full px-2 py-1 min-w-full">
           <Link to={"/"} className="link">
             <GoHomeFill className="sidebarIcons" />
@@ -56,12 +54,15 @@ const Sidebar = ({sidebar,toggleSidebar}) => {
             <h3>Watch later</h3>
           </Link>
 
-          <Link 
-          to={""} 
-          className="link hover:bg-red-600"
-          onClick={()=>dispatch(logoutUser())}
+          <Link
+            to={""}
+            className="link hover:bg-red-600"
+            onClick={() => {
+              dispatch(setLoading());
+              signOut(auth);
+            }}
           >
-            <MdLogout className="sidebarIcons"/>
+            <MdLogout className="sidebarIcons" />
             <h3>Log out</h3>
           </Link>
         </nav>

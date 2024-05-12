@@ -9,7 +9,7 @@ const CategoriesBar = () => {
     let categories = ["All","React js", "Next js", "Computer Programming", "Science fiction", "Gaming", "Anime", "Movies", "React js", "Next js", "Computer Programming", "Science fiction", "Gaming", "Anime", "Movies"];
 
   return (
-    <div className=" flex py-1 my-2 max-w-full">
+    <div className="px-3 md:px-6 flex py-1 my-2 max-w-full">
       <div className="categoriesBar ">
         {categories.map((category) => {
           return (
