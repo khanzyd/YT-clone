@@ -7,41 +7,38 @@ import { setHomeVideos } from "../features/videos/homeVideosSlice";
 
 const HomeScreen = () => {
   let dispatch = useDispatch();
-  let {videos} = useSelector((store)=>store.homeVideos)
+  let { videos } = useSelector((store) => store.homeVideos);
   console.log("rendering homescreen");
-
   useEffect(() => {
     let getHomeScreenVideos = async () => {
       let res = await request("/videos", {
         params: {
-          part: "snippet,statistics,contentDetails",
+          part: "snippet",
           chart: "mostPopular",
+          maxResults: 30,
           regionCode: "IN",
           pageToken: "",
         },
       });
       return res;
-    }; 
-    getHomeScreenVideos().then((res)=>{
-      dispatch(setHomeVideos(
-        {
-          videos:res?.data?.items,
-          nextPageToken: res?.data?.nextPageToken
-        }
-      ))
+    };
+    getHomeScreenVideos().then((res) => {
+      dispatch(
+        setHomeVideos({
+          videos: res?.data?.items,
+          nextPageToken: res?.data?.nextPageToken,
+        })
+      );
     });
-    
   }, []);
-  
+
   return (
     <div className="py-3">
       <CategoriesBar />
       <div className="my-10 md:mx-6 px-4 md:px-0 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-8 xl:gap-4">
-        {
-          videos.map((video)=>{
-            return <Home_VideoCard key={video.id} video={video} />;
-          })
-        }
+        {videos.map((video) => {
+          return <Home_VideoCard key={video.id} video={video} />;
+        })}
         {/* <Home_VideoCard />
         <Home_VideoCard />
         <Home_VideoCard />
