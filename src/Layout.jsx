@@ -8,17 +8,15 @@ import Loader from "./components/loader/Loader";
 
 const Layout = () => {
   const user = useSelector((store) => store.user);
-  const {loading} = useSelector((store)=>store.loading)
+  const { loading } = useSelector((store) => store.loading);
 
   const [sidebar, setSidebar] = useState(true);
   const toggleSidebar = () => setSidebar((value) => !value);
-
-  console.log("rendering layout");
-  console.log(loading);
-
+  
   return (
     <>
       {loading && <Loader />}
+      {!loading && !user.email && <Navigate to={"/auth"} />}
       {!loading && user.email && (
         <div className="w-scrren h-screen bg-yt-main">
           <Header toggleSidebar={toggleSidebar} />
@@ -32,8 +30,6 @@ const Layout = () => {
           </div>
         </div>
       )}
-      {!loading && !user.email && <Navigate to={"/auth"}  />}
-
     </>
   );
 };

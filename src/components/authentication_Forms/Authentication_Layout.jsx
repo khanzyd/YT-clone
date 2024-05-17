@@ -5,10 +5,9 @@ import "./_auth.css";
 import { useSelector } from "react-redux";
 
 const Authentication_Layout = () => {
-  let user = useSelector((store)=>store.user)
   console.log("authentication layout");
   let [formType, setFormType] = useState("Login");
-  console.log(user);
+
   return (
     <div className="h-full w-full flex justify-center items-center">
       <div className="auth-Layout">

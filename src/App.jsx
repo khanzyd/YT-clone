@@ -6,13 +6,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import HomeScreen from "./screens/HomeScreen";
+import HomeScreen, { } from "./screens/HomeScreen";
 import Layout from "./Layout";
 import Authentication_Layout from "./components/authentication_Forms/Authentication_Layout";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./features/auth/authSlice";
 import { setLoading } from "./features/loading";
 
@@ -29,10 +29,9 @@ export const router = createBrowserRouter(
 
 function App() {
   let dispatch = useDispatch();
-
+  
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       dispatch(
         setUser({
           email: currentUser?.email,

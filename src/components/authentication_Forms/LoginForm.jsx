@@ -1,6 +1,4 @@
-import {
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,21 +7,30 @@ import { useNavigate } from "react-router-dom";
 import { setLoading } from "../../features/loading";
 
 const LoginForm = ({ setFormType }) => {
-  let {loading} = useSelector((store)=>store.loading)
+  let { loading } = useSelector((store) => store.loading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  let [error, setError] = useState("");
 
   let login = () => {
+    setError(false);
     try {
-      signInWithEmailAndPassword(auth, email, password).then(() => {
-        navigate("/");
-      });
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          navigate("/");
+          setEmail("");
+          setPassword("");
+          setError("")
+        })
+        .catch((err) => {
+          setError(err.message);
+          dispatch(setLoading());
+          console.log(err ? err.message : "err");
+        });
       dispatch(setLoading());
-      // setEmail("");
-      // setPassword("");
     } catch (err) {
       console.log(err);
     }
@@ -43,12 +50,17 @@ const LoginForm = ({ setFormType }) => {
         inputValue={password}
         setter={setPassword}
       />
-
-      <button
-        className="form-submit-btn"
-        onClick={login}
+      <p
+        className={
+          error.length > 0
+            ? "text-xl text-red-700 font-semibold block"
+            : "hidden"
+        }
       >
-        {`${loading == false? "Login":"loading..."}`}
+        {error}
+      </p>
+      <button className="form-submit-btn" onClick={login}>
+        {`${loading == false ? "Login" : "loading..."}`}
       </button>
       <div className="flex select-none">
         <p className="mr-2">Don't have an account </p>

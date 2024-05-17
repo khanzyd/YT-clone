@@ -11,9 +11,9 @@ const CategoriesBar = () => {
   return (
     <div className="px-3 md:px-6 flex py-1 my-2 max-w-full">
       <div className="categoriesBar ">
-        {categories.map((category) => {
+        {categories.map((category,index) => {
           return (
-            <button className="bg-yt-secondary font-semibold tracking-wide text-center text-slate-100 px-3 py-1 rounded-md">
+            <button key={index} className="bg-yt-secondary font-semibold tracking-wide text-center text-slate-100 px-3 py-1 rounded-md">
               {category}
             </button>
           );
