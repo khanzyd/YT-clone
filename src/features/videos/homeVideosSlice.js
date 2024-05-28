@@ -11,8 +11,10 @@ const homeVideosSlice = createSlice({
   reducers: {
     setHomeVideos:(state,{payload})=>{
       console.log('setting videos');
+      console.log(payload.videos);
       state.videos = payload.videos;
       state.nextPageToken = payload.nextPageToken;
+      console.log(state.videos);
     }
   },
 });

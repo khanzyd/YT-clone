@@ -3,10 +3,12 @@ import authReducer from "./features/auth/authSlice";
 import loadingReducer from "./features/loading";
 import homeVideosReducer from "./features/videos/homeVideosSlice"
 
-export default configureStore({
+let store = configureStore({
   reducer: {
     user: authReducer,
     loading: loadingReducer,
     homeVideos: homeVideosReducer,
   },
 });
+
+export default store;

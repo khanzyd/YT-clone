@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
 
 const initialState = { 
   email: null,
@@ -14,6 +12,7 @@ const authSlice = createSlice({
 
   reducers: {
     setUser:(state,{payload}) => {
+      console.log("setting user");
       state.email = payload.email;
       state.name = payload.name;
       state.emailVerified = payload.emailVerified

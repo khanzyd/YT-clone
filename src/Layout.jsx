@@ -12,19 +12,23 @@ const Layout = () => {
 
   const [sidebar, setSidebar] = useState(true);
   const toggleSidebar = () => setSidebar((value) => !value);
-  
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
-      {loading && <Loader />}
-      {!loading && !user.email && <Navigate to={"/auth"} />}
-      {!loading && user.email && (
-        <div className="w-scrren h-screen bg-yt-main">
+      {!user.email ? (
+        <Navigate to={"/auth"} />
+      ) : (
+        <div className="w-scrren  bg-yt-main">
           <Header toggleSidebar={toggleSidebar} />
 
-          <div className="h-[92vh] md:h-[90vh] xl:h-[93vh] md:flex relative ">
+          <div className="h-[92vh] md:h-[90vh] xl:h-[93vh] md:flex relative">
             <Sidebar sidebar={sidebar} toggleSidebar={toggleSidebar} />
 
-            <div className="overflow-y-scroll w-full h-full">
+            <div className="overflow-auto w-full h-full">
               <Outlet />
             </div>
           </div>
