@@ -50,35 +50,35 @@ const HomeScreen = () => {
   
 
   return (
-    <div className="py-3 overflow-auto">
+    <div className="homescreen py-3">
       <CategoriesBar />
       {/* <div className="my-10 md:mx-6 px-4 md:px-0 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-8 xl:gap-4 bg-red-400 overflow-auto"> */}
-        {/* {videos.map((video) => {
+      {/* {videos.map((video) => {
           return (
             <Home_VideoCard key={video.id} video={video} />
           );
         })} */}
 
-        <InfiniteScroll
-          dataLength={hVideos.length} //This is important field to render the next data
-          next={()=>{
-            console.log("adding videos");
-            getHomeScreenVideos()
-          }}
-          hasMore={true}
-          height={"100vh"}
-          className="my-10 md:mx-6 px-4 md:px-0 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-8 xl:gap-4"
-          loader={<h4>Loading...</h4>}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
-        >
-          {hVideos.map((video,index) => {
-            return <Home_VideoCard key={index} video={video} />;
-          })}
-        </InfiniteScroll>
+      <InfiniteScroll
+        dataLength={hVideos.length} //This is important field to render the next data
+        next={() => {
+          console.log("adding videos");
+          getHomeScreenVideos();
+        }}
+        hasMore={true}
+        height={"100vh"}
+        className="infinite-scroll-component"
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+        {hVideos.map((video, index) => {
+          return <Home_VideoCard key={index} video={video} />;
+        })}
+      </InfiniteScroll>
       {/* </div> */}
     </div>
   );

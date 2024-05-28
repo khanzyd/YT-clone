@@ -28,7 +28,7 @@ const Layout = () => {
           <div className="h-[92vh] md:h-[90vh] xl:h-[93vh] md:flex relative">
             <Sidebar sidebar={sidebar} toggleSidebar={toggleSidebar} />
 
-            <div className="overflow-auto w-full h-full">
+            <div className="screen overflow-auto w-full h-full">
               <Outlet />
             </div>
           </div>

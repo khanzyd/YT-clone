@@ -49,7 +49,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-yt-main h-screen  w-screen">
+      <div className="bg-yt-main min-h-screen w-screen">
         <RouterProvider router={router} />
       </div>
     </>
