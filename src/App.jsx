@@ -19,11 +19,11 @@ import { setLoading } from "./features/loading";
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout/>}>
           <Route index element={<HomeScreen />} />
-          <Route path="/watch" element={<VideoScreen/>}/>
-        <Route path="auth" element={<Authentication_Layout />} />
+          <Route path="watch" element={<VideoScreen/>}/>
         </Route>
+          <Route path="/auth" element={<Authentication_Layout/>} />
       </>
     )
   );
@@ -49,7 +49,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-yt-main  w-screen">
+      <div className="bg-yt-main h-screen  w-screen">
         <RouterProvider router={router} />
       </div>
     </>
