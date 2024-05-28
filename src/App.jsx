@@ -23,7 +23,7 @@ import { setLoading } from "./features/loading";
           <Route index element={<HomeScreen />} />
           <Route path="watch" element={<VideoScreen/>}/>
         </Route>
-          <Route path="/auth" element={<Authentication_Layout/>} />
+        <Route path="/auth" element={<Authentication_Layout/>} />
       </>
     )
   );
