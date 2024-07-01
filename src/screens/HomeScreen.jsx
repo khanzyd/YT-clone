@@ -4,16 +4,15 @@ import Home_VideoCard from "../components/home_VideoCard/Home_VideoCard";
 import request from "../api";
 import { useDispatch, useSelector } from "react-redux";
 import { setHomeVideos } from "../features/videos/homeVideosSlice";
-import { Link } from "react-router-dom";
-import { auth } from "../firebase";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const HomeScreen = () => {
   let dispatch = useDispatch();
   let { videos,nextPageToken } = useSelector((store) => store.homeVideos);
-  let [hVideos,setHVideos] = useState([])
-  console.log(nextPageToken);
-  console.log(videos);
+  // let [hVideos,setHVideos] = useState([])
+  console.log("rendering homescreen");
+  // console.log(nextPageToken);
+  // console.log(videos);
 
   let getHomeScreenVideos = async () => {
     let res = await request("/videos", {
@@ -25,8 +24,6 @@ const HomeScreen = () => {
         pageToken: nextPageToken? nextPageToken : "",
       },
     });
-    // return res;
-    // console.log();
     
     dispatch(
       setHomeVideos({
@@ -34,21 +31,16 @@ const HomeScreen = () => {
         nextPageToken: res?.data?.nextPageToken,
       })
     );
-    console.log(videos);
-    setHVideos(videos)
+    // setHVideos(videos)
   };
 
   useEffect(() => {
-    // getHomeScreenVideos().then((res) => {
-
-    // });
     getHomeScreenVideos()
   }, []);
-  useEffect(() => {
-    setHVideos(videos)
-  }, [videos])
+  // useEffect(() => {
+  //   setHVideos(videos)
+  // }, [videos])
   
-
   return (
     <div className="homescreen py-3">
       <CategoriesBar />
@@ -60,7 +52,7 @@ const HomeScreen = () => {
         })} */}
 
       <InfiniteScroll
-        dataLength={hVideos.length} //This is important field to render the next data
+        dataLength={videos.length} 
         next={() => {
           console.log("adding videos");
           getHomeScreenVideos();
@@ -75,16 +67,12 @@ const HomeScreen = () => {
           </p>
         }
       >
-        {hVideos.map((video, index) => {
+        {videos.map((video, index) => {
           return <Home_VideoCard key={index} video={video} />;
         })}
       </InfiniteScroll>
-      {/* </div> */}
     </div>
   );
 };
-
-
-
 
 export default HomeScreen;
