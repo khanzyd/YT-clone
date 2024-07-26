@@ -1,5 +1,4 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import Header from "./components/header/Header";
@@ -10,9 +9,6 @@ const Layout = () => {
   const user = useSelector((store) => store.user);
   const { loading } = useSelector((store) => store.loading);
 
-  const [sidebar, setSidebar] = useState(true);
-  const toggleSidebar = () => setSidebar((value) => !value);
-
   if (loading) {
     return <Loader />;
   }
@@ -22,14 +18,15 @@ const Layout = () => {
       {!user.email ? (
         <Navigate to={"/auth"} />
       ) : (
-        <div className="w-scrren  bg-yt-main">
-          <Header toggleSidebar={toggleSidebar} />
+        <div className="w-scrren bg-yt-main">
+          {/* <Header toggleSidebar={toggleSidebar} /> */}
+          <Header/>
 
           <div className="h-[92vh] md:h-[90vh] xl:h-[93vh] md:flex relative">
-            <Sidebar sidebar={sidebar} toggleSidebar={toggleSidebar} />
+            <Sidebar/>
 
-            <div className="screen overflow-auto w-full h-full">
-              <Outlet />
+            <div className="overflow-auto w-full h-full">
+              <Outlet/>
             </div>
           </div>
         </div>

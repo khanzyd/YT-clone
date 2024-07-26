@@ -13,16 +13,18 @@ import {
   MdLogout,
 } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { setLoading } from "../../features/loading";
 
-const Sidebar = ({ sidebar, toggleSidebar }) => {
+const Sidebar = () => {
   let dispatch = useDispatch();
+  let {state} = useSelector((store)=>store.sidebar)
   return (
     <>
-      <div className={`sidebar ${sidebar ? "open" : "close"}`}>
+    {console.log(state)}
+      <div className={`sidebar ${state ? "open" : "close"}`}>
         <nav className="Navbar flex flex-col items-strecthmin-h-full px-2 py-1 min-w-full">
           <Link to={"/"} className="link">
             <GoHomeFill className="sidebarIcons" />

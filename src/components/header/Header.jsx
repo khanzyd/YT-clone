@@ -1,20 +1,25 @@
-import React from 'react'
-import "./_header.css"
+import React from "react";
+import "./_header.css";
 import { FaBars, FaRegUserCircle, FaSearch } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { TbVideoPlus } from "react-icons/tb";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
-import YT_Logo from "../../assets/YT_logo_2.svg"
+import YT_Logo from "../../assets/YT_logo_2.svg";
+import { useDispatch } from "react-redux";
+import { togglesideBar } from "../../features/sidebarSlice";
 
-const Header = ({toggleSidebar}) => {
+const Header = () => {
+  let dispatch = useDispatch();
   return (
     <div className="h-[8vh] md:h-[10vh] xl:h-[7vh] bg-yt-main border-b-2 border-b-yt-secondary text-slate-50 px-4 flex items-center">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center select-none">
-          <FaBars 
+          <FaBars
             className="text-3xl mr-3"
-            onClick={()=>toggleSidebar()}
+            onClick={() => {
+              dispatch(togglesideBar());
+            }}
           />
           <div className="w-32">
             <img src={YT_Logo} className="" alt="" />
@@ -46,6 +51,6 @@ const Header = ({toggleSidebar}) => {
       </div>
     </div>
   );
-}
+};
 
-export default Header
+export default Header;

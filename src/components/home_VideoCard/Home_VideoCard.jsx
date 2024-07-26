@@ -6,8 +6,11 @@ import request from "../../api";
 import moment from "moment";
 import numeral from "numeral";
 import { Link, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { togglesideBar } from "../../features/sidebarSlice";
 
 const Home_VideoCard = ({ video }) => {
+  let dispatch = useDispatch();
   let [duration, setDuration] = useState("");
   let [views, setViews] = useState("");
   let [channelThumbnail, setChannelThumbnail] = useState("");
@@ -60,7 +63,7 @@ const Home_VideoCard = ({ video }) => {
 
   return (
     <>
-      <Link to={"watch?v=" + `${video.id}`}>
+      <Link to={"watch?v=" + `${video.id}`} onClick={()=>dispatch(togglesideBar(false))}>
         <div className="w-full py-2 cursor-pointer">
           <div className="relative w-full rounded-xl overflow-hidden ">
             <img
