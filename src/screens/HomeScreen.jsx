@@ -43,6 +43,7 @@ const HomeScreen = () => {
           console.log("adding videos");
           getHomeScreenVideos();
         }}
+        style={{padding: "0px"}}
         hasMore={true}
         height={"100vh"}
         className="infinite-scroll-component"

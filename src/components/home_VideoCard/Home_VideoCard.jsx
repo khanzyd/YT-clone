@@ -64,8 +64,8 @@ const Home_VideoCard = ({ video }) => {
   return (
     <>
       <Link to={"watch?v=" + `${video.id}`} onClick={()=>dispatch(togglesideBar(false))}>
-        <div className="w-full py-2 cursor-pointer">
-          <div className="relative w-full rounded-xl overflow-hidden ">
+        <div className="w-full md:py-2 cursor-pointer">
+          <div className="relative w-full md:rounded-xl overflow-hidden  ">
             <img
               src={medium.url || YT_Thumbnail}
               alt=""
