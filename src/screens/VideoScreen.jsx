@@ -3,53 +3,17 @@ import ReactPlayer from 'react-player/youtube';
 import { useLocation } from 'react-router-dom';
 import VideoDetails from '../components/videoScreen/VideoDetails';
 import SuggestionVideo from '../components/videoScreen/SuggestionVideo';
-import request from '../api';
-import { useDispatch, useSelector } from 'react-redux';
-import watchVideoSlice, { setWatchVideoInfo } from '../features/videos/watchVideoSlice';
-import numeral from 'numeral';
+import { useDispatch } from 'react-redux';
+import { togglesideBar } from '../features/sidebarSlice';
 
 
 const VideoScreen = () => { 
   console.log("videoscreen");
   let dispatch = useDispatch();
-  
   let {search} = useLocation();
   const query = new URLSearchParams(search)
   let id = query.get("v");
-  
-  let getVideoScreenInfo = async () => {
-    let res = await request("/videos", {
-      params: {
-        part: "snippet,contentDetails,statistics",
-        id
-      },
-    });
-
-    let rawInfo = res?.data?.items[0] || {};
-    let data = {
-      title: res?.data?.items[0]?.snippet?.localized?.title,
-      channelTitle : rawInfo?.snippet?.channelTitle,
-      // channelImg :
-      // channelSubscribers :
-      description: rawInfo?.snippet?.localized?.description,
-      descriptionTags: rawInfo?.snippet?.tags,
-      viewCount: numeral(rawInfo?.statistics?.viewCount).format("0.0a"),
-      likeCount: numeral(rawInfo?.statistics?.likeCount).format("0.0a"),
-      commentCount: numeral(rawInfo?.statistics?.commentCount).format("0.0a"),
-    };
-    // console.log(rawInfo);
-    // console.log(data.commentCount);
-    dispatch(setWatchVideoInfo({WatchVideoInfo:{data}}));
-    return res;
-  } 
-
-  useEffect(() => {
-    getVideoScreenInfo().then((data)=>{
-      console.log("done");
-      console.log();
-      
-    })
-  }, [])
+  dispatch(togglesideBar(false));
   
   return (
     <div className="md:w-11/12 mx-2 md:mx-auto mt-5 md:mt-10 flex-col md:flex md:flex-row">
@@ -70,7 +34,7 @@ const VideoScreen = () => {
             controls={true}
           />
         </div>
-        <VideoDetails/>
+        <VideoDetails id={id}/>
       </div>
       <div className="h-[200vh] w-full md:w-1/3">
           <div className='flex flex-col gap-2'>

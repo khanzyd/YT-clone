@@ -1,8 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
-    watchVideoInfo : null
-}
+  watchVideoInfo: {
+    title : undefined,
+    channelTitle : undefined,
+    description : undefined,
+    descriptionTags : undefined,
+    viewCount : undefined,
+    likeCount : undefined,
+    commentCount : undefined,
+    publishedAt : undefined,
+  },
+};
 
 const watchVideoSlice = createSlice({
     name:"watchVideo",
@@ -11,7 +20,7 @@ const watchVideoSlice = createSlice({
         setWatchVideoInfo: (state,{payload}) => {
             console.log("Payload");
             state.watchVideoInfo = payload.data;
-            console.log(state.watchVideoInfo);            
+            // console.log(state.watchVideoInfo);            
             console.log(payload.data);
             
         }

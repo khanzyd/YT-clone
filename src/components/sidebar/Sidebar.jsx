@@ -1,6 +1,6 @@
 import React from "react";
 import "./_sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { GoHomeFill } from "react-icons/go";
 import { IoIosLogOut } from "react-icons/io";
@@ -21,10 +21,16 @@ import { setLoading } from "../../features/loading";
 const Sidebar = () => {
   let dispatch = useDispatch();
   let {state} = useSelector((store)=>store.sidebar)
+  let path = useLocation();
+  
   return (
     <>
-    {console.log(state)}
-      <div className={`sidebar ${state ? "open" : "close"}`}>
+      {console.log(state)}
+      <div
+        className={`sidebar ${state ? "open" : "close"} ${
+          path.pathname == "/" ? "" : "absolute"
+        }`}
+      >
         <nav className="Navbar flex flex-col items-strecthmin-h-full px-2 py-1 min-w-full">
           <Link to={"/"} className="link">
             <GoHomeFill className="sidebarIcons" />
