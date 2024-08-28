@@ -3,12 +3,10 @@ import "./_sidebar.css";
 import { Link, useLocation } from "react-router-dom";
 
 import { GoHomeFill } from "react-icons/go";
-import { IoIosLogOut } from "react-icons/io";
 import {
   MdOutlineSubscriptions,
   MdHistory,
   MdLibraryAdd,
-  MdOutlineWatchLater,
   MdWatchLater,
   MdLogout,
 } from "react-icons/md";

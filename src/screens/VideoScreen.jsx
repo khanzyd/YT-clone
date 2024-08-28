@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player/youtube';
 import { useLocation } from 'react-router-dom';
 import VideoDetails from '../components/videoScreen/VideoDetails';
@@ -14,7 +14,7 @@ const VideoScreen = () => {
   const query = new URLSearchParams(search)
   let id = query.get("v");
   dispatch(togglesideBar(false));
-  
+
   return (
     <div className="md:w-11/12 mx-2 md:mx-auto mt-5 md:mt-10 flex-col md:flex md:flex-row">
       <div className="w-full md:w-2/3 md:mx-10">

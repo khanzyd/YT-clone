@@ -3,7 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState = {
   watchVideoInfo: {
     title : undefined,
+    channelId: undefined,
+    channelImg: undefined,
     channelTitle : undefined,
+    channelSubscribers : undefined,
     description : undefined,
     descriptionTags : undefined,
     viewCount : undefined,
@@ -18,11 +21,7 @@ const watchVideoSlice = createSlice({
     initialState,
     reducers:{
         setWatchVideoInfo: (state,{payload}) => {
-            console.log("Payload");
             state.watchVideoInfo = payload.data;
-            // console.log(state.watchVideoInfo);            
-            console.log(payload.data);
-            
         }
     }
 })
