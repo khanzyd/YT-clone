@@ -12,7 +12,7 @@ const VideoScreen = () => {
   let dispatch = useDispatch();
   let {search} = useLocation();
   const query = new URLSearchParams(search)
-  let id = query.get("v");
+  let videoId = query.get("v");
   dispatch(togglesideBar(false));
 
   return (
@@ -20,7 +20,7 @@ const VideoScreen = () => {
       <div className="w-full md:w-2/3 md:mx-10">
         <div className="h-[27vh] md:h-[65vh] md:rounded-2xl md:overflow-hidden">
           <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${id}`}
+            url={`https://www.youtube.com/watch?v=${videoId}`}
             style={{
               margin: "auto",
               borderRadius: "0px",
@@ -34,7 +34,7 @@ const VideoScreen = () => {
             controls={true}
           />
         </div>
-        <VideoDetails id={id}/>
+        <VideoDetails videoId={videoId}/>
       </div>
       <div className="h-[200vh] w-full md:w-1/3">
           <div className='flex flex-col gap-2'>

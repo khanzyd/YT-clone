@@ -5,11 +5,14 @@ import { PiShareFat } from "react-icons/pi";
 import YT_Channel from "../../assets/YT_channel2.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import request from "../../api";
-import { setWatchVideoInfo } from "../../features/videos/watchVideoSlice";
+import { setComments, setWatchVideoInfo } from "../../features/videos/watchVideoSlice";
 import numeral from "numeral";
 import moment from "moment";
+import VideoComments from "./VideoComments";
 
-const VideoDetails = ({ id }) => {
+const VideoDetails = ({ videoId }) => {
+  console.log("videoDetailsPage");
+  
   let dispatch = useDispatch();
   let {
     watchVideoInfo: {
@@ -19,11 +22,13 @@ const VideoDetails = ({ id }) => {
       channelTitle,
       channelSubscribers,
       description,
+      vId,
       descriptionTags,
       viewCount,
       likeCount,
       commentCount,
       publishedAt,
+      comments,
     },
   } = useSelector((store) => store.watchVideoInfo);
 
@@ -39,17 +44,48 @@ const VideoDetails = ({ id }) => {
     return data?.data?.items[0];
   };
 
+  // function to get comments of video playing inside the video screen
+  let getAllComments = async () => {
+
+    let { data } = await request("/commentThreads", {
+      params: {
+        part: "snippet",
+        videoId,
+      },
+    });
+    
+    let allComments = data?.items?.map((item) => {
+      return {
+        text: item.snippet?.topLevelComment?.snippet?.textDisplay,
+        likeCount: numeral(item.snippet?.topLevelComment?.snippet?.likeCount)
+          .format("0a")
+          ?.toUpperCase(),
+        publishedAt: moment(
+          item.snippet?.topLevelComment?.snippet?.publishedAt
+        ).fromNow(),
+        author: item.snippet?.topLevelComment?.snippet?.authorDisplayName,
+        author_profileImageUrl:
+          item.snippet?.topLevelComment?.snippet?.authorProfileImageUrl,
+      };
+    });
+    
+    return allComments;
+    // dispatch(setComments(comments));
+  };
+
+
   // function to get data about video playing inside the video screen
   let getVideoScreenInfo = async () => {
     let res = await request("/videos", {
       params: {
         part: "snippet,contentDetails,statistics",
-        id,
+        id: videoId,
       },
     });
 
     let rawInfo = res?.data?.items[0] || {};
     let channelData = await getChannelInfo(rawInfo?.snippet?.channelId);
+    let allComments = await getAllComments();
 
     let data = {
       title: res?.data?.items[0]?.snippet?.localized?.title,
@@ -60,6 +96,7 @@ const VideoDetails = ({ id }) => {
       channelSubscribers: numeral(channelData?.statistics?.subscriberCount)
         .format("0a")
         ?.toUpperCase(),
+      vId: videoId,
       description: rawInfo?.snippet?.localized?.description,
       descriptionTags: rawInfo?.snippet?.tags,
       viewCount: numeral(rawInfo?.statistics?.viewCount)
@@ -72,6 +109,7 @@ const VideoDetails = ({ id }) => {
         .format("0.0a")
         ?.toUpperCase(),
       publishedAt: moment(rawInfo?.snippet?.publishedAt).fromNow(),
+      comments : allComments,
     };
 
     dispatch(setWatchVideoInfo({ data }));
@@ -144,12 +182,13 @@ const VideoDetails = ({ id }) => {
             return <span className="mx-1" key={index}>{`#${desc}`}</span>;
           }) || ""}
         </p>
-        <p className="my-2">{description || "Error"}</p>
+        <p className="my-2">{/* {description || "Error"} */}</p>
       </div>
 
       <div className="my-3">
         <h3 className="text-2xl font-semibold text-slate-50 ">
           {commentCount || 0} Comments
+          {(comments.length > 0) && <VideoComments comments={comments}/>}
         </h3>
       </div>
     </div>
