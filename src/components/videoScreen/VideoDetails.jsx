@@ -53,9 +53,11 @@ const VideoDetails = ({ videoId }) => {
         videoId,
       },
     });
+    console.log(data);
     
     let allComments = data?.items?.map((item) => {
       return {
+        commentId: item.snippet?.topLevelComment?.id,
         text: item.snippet?.topLevelComment?.snippet?.textDisplay,
         likeCount: numeral(item.snippet?.topLevelComment?.snippet?.likeCount)
           .format("0a")
@@ -86,7 +88,7 @@ const VideoDetails = ({ videoId }) => {
     let rawInfo = res?.data?.items[0] || {};
     let channelData = await getChannelInfo(rawInfo?.snippet?.channelId);
     let allComments = await getAllComments();
-
+    
     let data = {
       title: res?.data?.items[0]?.snippet?.localized?.title,
       channelId: rawInfo?.snippet?.channelId,

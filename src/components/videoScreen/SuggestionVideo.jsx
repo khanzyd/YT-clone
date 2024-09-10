@@ -13,7 +13,7 @@ const SuggestionVideo = () => {
         </span>
       </div>
       <div className="cursor-pointer md:w-7/12">
-        <div className="my-2 flex gap-2">
+        <div className="my-2 flex gap-2 h-full">
           <div className="my-auto md:hidden w-[14%] overflow-hidden">
             <img
               src={YT_Channel}
@@ -22,7 +22,7 @@ const SuggestionVideo = () => {
             />
           </div>
 
-          <div className="flex flex-col text-slate-100 leading-5 w-[85%] md:w-full">
+          <div className="flex flex-col text-slate-100 leading-5 w-[85%] md:w-full md:h-full">
             <TextTruncate
               line={2}
               className="font-semibold"
@@ -33,7 +33,7 @@ const SuggestionVideo = () => {
               }
               // "INSANE OCTANE SOLO 23 KILLS and 5,960 DAMAGE APEX LEGENDS GAMEPLAY 2024 VER 20"
             />
-            <div className="flex gap-3 md:gap-0 md:flex-col my-1 font-light md:text-xs md:tracking-wide">
+            <div className="flex gap-3 md:gap-1 md:flex-col font-light md:text-xs md:tracking-wide md:my-auto">
               <p>{"Hello World"}</p>
               <p>
                 {"36M"} views • {"3 years ago"}

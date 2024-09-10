@@ -9,7 +9,7 @@ const VideoComments = ({ comments }) => {
     <div>
       {comments.map((comment) => {
         return (
-          <div className="flex w-full gap-2 my-3">
+          <div className="flex w-full gap-2 my-3" key={comment.commentId}>
             <div className="w-[5%] overflow-hidden">
               <img
                 src={comment.author_profileImageUrl}
